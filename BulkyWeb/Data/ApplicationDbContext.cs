@@ -10,7 +10,6 @@ namespace BulkyWeb.Data
         {
 
         }
-
         public DbSet<Category> Categories { get; set; }
     }
 }
