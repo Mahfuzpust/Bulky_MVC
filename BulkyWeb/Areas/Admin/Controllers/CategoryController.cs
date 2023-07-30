@@ -4,8 +4,9 @@ using Bulky.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace BulkyWeb.Controllers
+namespace BulkyWeb.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -36,7 +37,7 @@ namespace BulkyWeb.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
-            
+
         }
         //Get Edit Method
         public IActionResult Edit(int? id)
@@ -45,7 +46,7 @@ namespace BulkyWeb.Controllers
             {
                 return NotFound();
             }
-            Category? category = _unitOfWork.Category.Get(c=>c.Id==id);
+            Category? category = _unitOfWork.Category.Get(c => c.Id == id);
             if (category == null)
             {
                 return NotFound();
@@ -73,7 +74,7 @@ namespace BulkyWeb.Controllers
             {
                 return NotFound();
             }
-            
+
             Category? obj = _unitOfWork.Category.Get(c => c.Id == id);
             if (obj == null)
             {
