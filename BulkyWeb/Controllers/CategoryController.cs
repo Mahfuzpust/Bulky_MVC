@@ -1,4 +1,5 @@
 ﻿using Bulky.DataAccess.Data;
+using Bulky.DataAccess.Repository.IRepository;
 using Bulky.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -7,14 +8,14 @@ namespace BulkyWeb.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ApplicationDbContext _db;
-        public CategoryController(ApplicationDbContext db)
+        private readonly ICategoryRepository _categoryRepo;
+        public CategoryController(ICategoryRepository db)
         {
-            _db = db;
+            _categoryRepo = db;
         }
         public IActionResult Index()
         {
-            List<Category> categories = _db.Categories.ToList();
+            List<Category> categories = _categoryRepo.GetAll().ToList();
             return View(categories);
         }
         //Get Create Method
@@ -25,12 +26,12 @@ namespace BulkyWeb.Controllers
         //POST Create Method
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Category category)
+        public IActionResult Create(Category category)
         {
             if (ModelState.IsValid)
             {
-                _db.Categories.Add(category);
-                await _db.SaveChangesAsync();
+                _categoryRepo.Add(category);
+                _categoryRepo.Save();
                 TempData["success"] = "Category Created Successfully";
                 return RedirectToAction(nameof(Index));
             }
@@ -44,7 +45,7 @@ namespace BulkyWeb.Controllers
             {
                 return NotFound();
             }
-            Category category = _db.Categories.SingleOrDefault(c => c.Id == id);
+            Category? category = _categoryRepo.Get(c=>c.Id==id);
             if (category == null)
             {
                 return NotFound();
@@ -54,12 +55,12 @@ namespace BulkyWeb.Controllers
         //POST Edit Method
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Category category)
+        public IActionResult Edit(Category category)
         {
             if (ModelState.IsValid)
             {
-                _db.Categories.Update(category);
-                await _db.SaveChangesAsync();
+                _categoryRepo.Update(category);
+                _categoryRepo.Save();
                 TempData["success"] = "Category Updated Successfully";
                 return RedirectToAction(nameof(Index));
             }
@@ -68,31 +69,27 @@ namespace BulkyWeb.Controllers
         //Delete GET Method
         public IActionResult Delete(int? id, Category category)
         {
-
             if (id == null)
             {
                 return NotFound();
             }
-            if (id != category.Id)
-            {
-
-            }
-            var ProductType = _db.Categories.FirstOrDefault(e => e.Id == id);
-            if (ProductType == null)
+            
+            Category? obj = _categoryRepo.Get(c => c.Id == id);
+            if (obj == null)
             {
                 return NotFound();
             }
-            return View(ProductType);
+            return View(obj);
         }
         //Delete Post Method 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(Category category)
+        public IActionResult Delete(Category category)
         {
             if (ModelState.IsValid)
             {
-                _db.Categories.Remove(category);
-                await _db.SaveChangesAsync();
+                _categoryRepo.Remove(category);
+                _categoryRepo.Save();
                 TempData["success"] = "Category Deleted Successfully";
                 return RedirectToAction(nameof(Index));
             }
