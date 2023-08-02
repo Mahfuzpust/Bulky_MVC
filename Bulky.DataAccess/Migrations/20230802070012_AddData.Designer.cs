@@ -3,6 +3,7 @@ using Bulky.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bulky.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230802070012_AddData")]
+    partial class AddData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,10 +68,6 @@ namespace Bulky.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<double>("ListPrice")
                         .HasColumnType("float");
 
@@ -99,7 +98,6 @@ namespace Bulky.DataAccess.Migrations
                             CategoryId = 1,
                             Description = "A model may be static or dynamic. In a static model, a single variable is taken as a key element for calculating cost and time.",
                             ISBN = "SWB012345698",
-                            ImageUrl = "",
                             ListPrice = 99.0,
                             Price = 90.0,
                             Price100 = 80.0,
@@ -113,7 +111,6 @@ namespace Bulky.DataAccess.Migrations
                             CategoryId = 2,
                             Description = "A model may be static or dynamic. In a static model, a single variable is taken as a key element for calculating cost and time.",
                             ISBN = "SWB012345698",
-                            ImageUrl = "",
                             ListPrice = 90.0,
                             Price = 85.0,
                             Price100 = 80.0,
@@ -127,7 +124,6 @@ namespace Bulky.DataAccess.Migrations
                             CategoryId = 3,
                             Description = "A model may be static or dynamic. In a static model, a single variable is taken as a key element for calculating cost and time.",
                             ISBN = "SWB012345698",
-                            ImageUrl = "",
                             ListPrice = 89.0,
                             Price = 50.0,
                             Price100 = 80.0,
@@ -141,7 +137,6 @@ namespace Bulky.DataAccess.Migrations
                             CategoryId = 4,
                             Description = "A model may be static or dynamic. In a static model, a single variable is taken as a key element for calculating cost and time.",
                             ISBN = "SWB012345698",
-                            ImageUrl = "",
                             ListPrice = 99.0,
                             Price = 90.0,
                             Price100 = 80.0,
