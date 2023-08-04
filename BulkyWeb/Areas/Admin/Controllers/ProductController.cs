@@ -106,38 +106,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
             }
         }
 
-        /*
-        public IActionResult Delete(int? id, Product Product)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            Product? obj = _unitOfWork.Product.Get(c => c.Id == id);
-            if (obj == null)
-            {
-                return NotFound();
-            }
-            return View(obj);
-        }
         
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Delete(Product Product)
-        {
-            if (ModelState.IsValid)
-            {
-                _unitOfWork.Product.Remove(Product);
-                _unitOfWork.Save();
-                TempData["success"] = "Product Deleted Successfully";
-                return RedirectToAction(nameof(Index));
-            }
-            else
-            {
-                return View(Product);
-            }
-        }*/
 
         #region Api calls
 
