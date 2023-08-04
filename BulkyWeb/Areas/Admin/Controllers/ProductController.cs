@@ -5,6 +5,7 @@ using Bulky.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata.Ecma335;
 
 namespace BulkyWeb.Areas.Admin.Controllers
 {
@@ -105,7 +106,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
             }
         }
 
-        //Delete GET Method
+        /*
         public IActionResult Delete(int? id, Product Product)
         {
             if (id == null)
@@ -120,7 +121,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
             }
             return View(obj);
         }
-        //Delete Post Method 
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(Product Product)
@@ -136,7 +137,9 @@ namespace BulkyWeb.Areas.Admin.Controllers
             {
                 return View(Product);
             }
-        }
+        }*/
+
+        #region Api calls
 
         [HttpGet]
         public IActionResult GetAll(int id)
@@ -144,5 +147,31 @@ namespace BulkyWeb.Areas.Admin.Controllers
             List<Product> productList = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
             return Json(new { data = productList });
         }
+
+        
+        public IActionResult Delete(int id)
+        {
+            var producToBeDeleted = _unitOfWork.Product.Get(u=>u.Id == id);
+            if(producToBeDeleted == null)
+            {
+                return Json(new {success = false, message="Error While Detecting"});
+            }
+
+            var oldImagePath =
+                           Path.Combine(_webHostEnvironment.WebRootPath,
+                           producToBeDeleted.ImageUrl.TrimStart('\\'));
+
+            if (System.IO.File.Exists(oldImagePath))
+            {
+                System.IO.File.Delete(oldImagePath);
+            }
+
+            _unitOfWork.Product.Remove(producToBeDeleted);
+            _unitOfWork.Save();
+
+            return Json(new { success = true, message = "Delete Successfull" });
+        }
+
+        #endregion
     }
 }
