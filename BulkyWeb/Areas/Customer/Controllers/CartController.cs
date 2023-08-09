@@ -36,6 +36,12 @@ namespace BulkyWeb.Areas.Customer.Controllers
             return View(ShoppingCartVM);
         }
 
+        public IActionResult Summary()
+        {
+            return View();
+        }
+
+
         //Increment Plus
         public IActionResult Plus(int Id)
         {
