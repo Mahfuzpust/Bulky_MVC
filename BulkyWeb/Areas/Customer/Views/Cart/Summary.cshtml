@@ -93,15 +93,15 @@
 											<h6 class="my-0">@details.Product.Title</h6>
 											<small class="">Quantity : @details.Count</small>
 										</div>
-										<span class="">৳ @((details.Price * details.Count))</span>
+										<span class="">@((details.Price * details.Count).ToString("c"))</span>
 								    </li>
 								}
 								
 
 
 								<li class="list-group-item d-flex justify-content-between bg-black bg-opacity-10 mt-2">
-									<small class="text-info">Total (TK)</small>
-									<strong class="text-info">৳ @Model.OrderHeader.OrderTotal</strong>
+									<small class="text-info">Total (USD)</small>
+									<strong class="text-info">@Model.OrderHeader.OrderTotal.ToString("c")</strong>
 								</li>
 							</ul>
 						</div>
