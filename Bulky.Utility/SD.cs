@@ -8,7 +8,6 @@ namespace Bulky.Utility
 {
     public static class SD
     {
-<<<<<<< HEAD
         public const string Role_Customer = "Customer";
         public const string Role_Company = "Company";
         public const string Role_Admin = "Admin";
@@ -26,11 +25,4 @@ namespace Bulky.Utility
 		public const string PaymentStatusDelayedPayment = "ApprovedForDelayedPayment";
 		public const string PaymentStatusRejected = "Rejected";
 	}
-=======
-        public const string Role_Customer= "Customer";
-        public const string Role_Company = "Company";
-        public const string Role_Admin = "Admin";
-        public const string Role_Employee = "Employee";
-    }
->>>>>>> master
 }
