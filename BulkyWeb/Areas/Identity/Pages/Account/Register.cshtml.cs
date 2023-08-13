@@ -10,10 +10,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
-<<<<<<< HEAD
 using Bulky.DataAccess.Repository.IRepository;
-=======
->>>>>>> master
 using Bulky.Models;
 using Bulky.Utility;
 using Microsoft.AspNetCore.Authentication;
@@ -38,10 +35,7 @@ namespace BulkyWeb.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-<<<<<<< HEAD
-        private readonly IUnitOfWork _unitOfWork;
-=======
->>>>>>> master
+
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
@@ -49,19 +43,10 @@ namespace BulkyWeb.Areas.Identity.Pages.Account
             IUserStore<IdentityUser> userStore,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-<<<<<<< HEAD
-            IEmailSender emailSender,
-            IUnitOfWork iunitOfWork)
-        {
-            _unitOfWork = iunitOfWork;
-            _roleManager = roleManager;
-            _userManager = userManager;
-=======
             IEmailSender emailSender)
         {
             _userManager = userManager;
             _roleManager = roleManager;
->>>>>>> master
             _userStore = userStore;
             _emailStore = GetEmailStore();
             _signInManager = signInManager;
@@ -127,7 +112,6 @@ namespace BulkyWeb.Areas.Identity.Pages.Account
             [ValidateNever]
             public IEnumerable<SelectListItem> RoleList { get; set; }
 
-<<<<<<< HEAD
             [Required]
             public string Name { get; set; }
             public string? StreetAddress { get; set; }
@@ -138,17 +122,12 @@ namespace BulkyWeb.Areas.Identity.Pages.Account
             public int? CompanyId { get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> CompanyList { get; set; }
-=======
->>>>>>> master
         }
 
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-<<<<<<< HEAD
 
-=======
->>>>>>> master
             if (!_roleManager.RoleExistsAsync(SD.Role_Customer).GetAwaiter().GetResult())
             {
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Customer)).GetAwaiter().GetResult();
