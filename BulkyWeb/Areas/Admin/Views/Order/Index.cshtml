@@ -1,46 +1,49 @@
 ﻿@model IEnumerable<Bulky.Models.ViewModels.OrderVM>
 
-
-<div class="container p-4">
-    <div class="row p-3">
-        <div class="col-6">
-            <h2>Order List</h2>
-        </div>
-        <div class="col-6 text-end">
-            <a asp-action="Upsert" asp-controller="Product" class="btn btn-info"><i class="bi bi-plus-circle"></i>&nbsp;Create New Product</a>
+<div class="card shadow border-0 mt-4 mb-4">
+    <div class="card-header bg-info bg-gradient text-light py-4">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h3 class="text-black ">Order List</h3>
+            </div>
         </div>
     </div>
+    <div class="card-body">
+        <div class="d-flex justify-content-between pb-5 pt-2">
+            <span></span>
+            <ul class="list-group list-group-horizontal-sm bg-dark">
+                <a style="text-decoration:none" asp-controller="Order" asp-action="Index" asp-route-status="inprocess">
+                <li class="list-group-item" style="border: solid 1px white">In Process</li>
+                </a>
+                <a style="text-decoration:none" asp-controller="Order" asp-action="Index" asp-route-status="pending">
+                <li class="list-group-item" style="border: solid 1px white">Payment Pending</li>
+                </a>
+                <a style="text-decoration:none" asp-controller="Order" asp-action="Index" asp-route-status="completed">
+                <li class="list-group-item" style="border: solid 1px white">Completed</li>
+                </a>
+                <a style="text-decoration:none" asp-controller="Order" asp-action="Index" asp-route-status="approved">
+                <li class="list-group-item" style="border: solid 1px white">Approved</li>
+                </a>
+                <a style="text-decoration:none" asp-controller="Order" asp-action="Index" asp-route-status="all">
+                <li class="list-group-item" style="border: solid 1px white">All</li>
+                </a>
+            </ul>
+        </div>
+        <table id="tblData" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
 </div>
-
-<table id="tblData" class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Phone Number</th>
-            <th>Email</th>
-            <th>Status</th>
-            <th>Total</th>
-            <th></th>
-        </tr>
-    </thead>
-    @*<tbody>
-    @foreach(var data in Model)
-    {
-    <tr>
-    <td>@data.Title</td>
-    <td>@data.Description</td>
-    <td>@data.Author</td>
-    <td>@data.ISBN</td>
-    <td>@data.Price</td>
-    <td>@data.Category.Name</td>
-    <td>
-    <partial name="_ButtonPartialProduct" model="@data.Id" />
-    </td>
-    </tr>
-    }
-    </tbody>*@
-</table>
 
 @section Scripts{
     <script src="~/js/order.js"></script>
