@@ -1,0 +1,31 @@
+﻿using Bulky.DataAccess.Repository;
+using Bulky.DataAccess.Repository.IRepository;
+using Bulky.Models;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+
+namespace BulkyWeb.Areas.Admin.Controllers
+{
+    [Area("Admin")]
+    public class OrderController : Controller
+    {
+
+        private readonly IUnitOfWork _unitOfWork;
+        public OrderController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult GetAll(int id)
+        {
+            List<OrderHeader> objOrderHeaders = _unitOfWork.OrderHeader.GetAll(includeProperties: "ApplicationUser").ToList();
+            return Json(new { data = objOrderHeaders });
+        }
+
+    }
+}
