@@ -51,7 +51,6 @@ namespace Bulky.DataAccess.Repository
 
         }
 
-
         //Category, CoverType
         public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter, string? includeProperties = null)
         {

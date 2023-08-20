@@ -60,5 +60,3 @@ namespace Bulky.DataAccess.Data
         }
     }
 }
-
-//

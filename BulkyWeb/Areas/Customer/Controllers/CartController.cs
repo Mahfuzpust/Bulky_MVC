@@ -121,7 +121,6 @@ namespace BulkyWeb.Areas.Customer.Controllers
 				_unitOfWork.Save();
 			}
 
-            // Stripe 
             if (applicationUser.CompanyId.GetValueOrDefault() == 0)
             {
                 //it is a regular customer account and we need to capture payment
@@ -146,7 +145,6 @@ namespace BulkyWeb.Areas.Customer.Controllers
                             ProductData = new SessionLineItemPriceDataProductDataOptions
                             {
                                 Name = item.Product.Title
-                                
                             }
                         },
                         Quantity = item.Count
@@ -172,28 +170,6 @@ namespace BulkyWeb.Areas.Customer.Controllers
 		//Order Confirmation
 		public IActionResult OrderConfirmation(int id)
         {
-            OrderHeader orderHeader = _unitOfWork.OrderHeader.Get(u => u.Id == id, includeProperties: "ApplicationUser");
-            if (orderHeader.PaymentStatus != SD.PaymentStatusDelayedPayment)
-            {
-                //this is an order by customer
-
-                var service = new SessionService();
-                Session session = service.Get(orderHeader.SessionId);
-
-                if (session.PaymentStatus.ToLower() == "paid")
-                {
-                    _unitOfWork.OrderHeader.UpdateStripePaymentID(id, session.Id, session.PaymentIntentId);
-                    _unitOfWork.OrderHeader.UpdateStatus(id, SD.StatusApproved, SD.PaymentStatusApproved);
-                    _unitOfWork.Save();
-                }
-                HttpContext.Session.Clear();
-            }
-
-            List<ShoppingCart> shoppingCarts = _unitOfWork.ShoppingCart
-                .GetAll(u => u.ApplicationUserId == orderHeader.ApplicationUserId).ToList();
-
-            _unitOfWork.ShoppingCart.RemoveRange(shoppingCarts);
-            _unitOfWork.Save();
             return View(id);
         }
 
@@ -211,13 +187,10 @@ namespace BulkyWeb.Areas.Customer.Controllers
         //Decrement Plus
         public IActionResult Minus(int Id)
         {
-            var cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.Id == Id, tracked: true);
+            var cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.Id == Id);
             if(cartFromDb.Count <= 1)
             {
-                //remove that cart
-                //_unitOfWork.ShoppingCart.Remove(cartFromDb);
-                HttpContext.Session.SetInt32(SD.SessionCart, _unitOfWork.ShoppingCart
-                    .GetAll(u => u.ApplicationUserId == cartFromDb.ApplicationUserId).Count() - 1);
+                //remove from cart
                 _unitOfWork.ShoppingCart.Remove(cartFromDb);
             }
             else
@@ -232,10 +205,7 @@ namespace BulkyWeb.Areas.Customer.Controllers
         //Delete Cart product
         public IActionResult Remove(int Id)
         {
-            var cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.Id == Id, tracked:true);
-            //_unitOfWork.ShoppingCart.Remove(cartFromDb);
-            HttpContext.Session.SetInt32(SD.SessionCart, _unitOfWork.ShoppingCart
-                .GetAll(u => u.ApplicationUserId == cartFromDb.ApplicationUserId).Count() - 1);
+            var cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.Id == Id);
             _unitOfWork.ShoppingCart.Remove(cartFromDb);
             _unitOfWork.Save();
             return RedirectToAction("Index");
