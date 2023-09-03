@@ -1,3 +1,4 @@
-# Bulky_MVC
+# Project View Image
 
+## Home page
 ![](images/1.png)
