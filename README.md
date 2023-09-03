@@ -1,11 +1,5 @@
 # Online BookShop (E-commerce Project)
-## Admin
-### UserName
-### admin2@gmail.com
-### Password
-### admin20225**##
 
-## Home Page
-![](img/1.png)
+### You follow link and see Project Demo image and details --> https://github.com/Mahfuzpust/Bulky_MVC/blob/new_branch2/README.md
 
 
