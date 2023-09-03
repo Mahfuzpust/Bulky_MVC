@@ -10,11 +10,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bulky.DataAccess", "Bulky.DataAccess\Bulky.DataAccess.csproj", "{3AF15D37-8C7A-4DA8-9B66-626C64B36A0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bulky.DataAccess", "Bulky.DataAccess\Bulky.DataAccess.csproj", "{3AF15D37-8C7A-4DA8-9B66-626C64B36A0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bulky.Models", "Bulky.Models\Bulky.Models.csproj", "{C40B4501-754A-4975-B7C7-33F7A30A8DDA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bulky.Models", "Bulky.Models\Bulky.Models.csproj", "{C40B4501-754A-4975-B7C7-33F7A30A8DDA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bulky.Utility", "Bulky.Utility\Bulky.Utility.csproj", "{88DD3EB6-8DC8-4612-AF84-82055F04C764}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bulky.Utility", "Bulky.Utility\Bulky.Utility.csproj", "{88DD3EB6-8DC8-4612-AF84-82055F04C764}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
